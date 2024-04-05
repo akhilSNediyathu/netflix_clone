@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix/core/colours/colors.dart';
 import 'package:netflix/core/constants.dart';
@@ -21,8 +19,8 @@ final _widgetList = [const _SmartDownloads(),
       appBar:const PreferredSize(preferredSize: Size.fromHeight(50),child: AppBarWidget(title: "Downloads",),
       ),
       body:ListView.separated(
-        padding: EdgeInsets.all(10),
-        itemBuilder:(ctx,index)=>_widgetList[index], separatorBuilder: (ctx,index)=>SizedBox(height: 25,), itemCount: _widgetList.length)
+        padding:const EdgeInsets.all(10),
+        itemBuilder:(ctx,index)=>_widgetList[index], separatorBuilder: (ctx,index)=>const SizedBox(height: 25,), itemCount: _widgetList.length)
     );
   }
 }
@@ -92,9 +90,7 @@ class Section3 extends StatelessWidget {
   }
 }
 class _SmartDownloads extends StatelessWidget {
-  const _SmartDownloads({
-    super.key,
-  });
+  const _SmartDownloads();
 
   @override
   Widget build(BuildContext context) {
