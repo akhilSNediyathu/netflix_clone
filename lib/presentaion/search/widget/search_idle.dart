@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:netflix/application/model/popular/popular.dart';
+
 import 'package:netflix/core/colours/colors.dart';
 import 'package:netflix/core/constants.dart';
 import 'package:netflix/presentaion/search/widget/title.dart';
 const imageUrl ='https://lh4.googleusercontent.com/proxy/1q9NRpASuGN_cmmMoc2fvRiNs1QLWJicZ7kU5gv-OLrDKryPMjo4NoGIIoz39DPyvyh6nTrWqiphFjr-kLZrS2DDkXznp17DwwQ';
 class SearchIdeWidget extends StatelessWidget {
-  const SearchIdeWidget({super.key});
+  final  List<Popular> popular;
+ const  SearchIdeWidget({super.key,required this .popular});
   
 
   @override
@@ -16,11 +19,15 @@ class SearchIdeWidget extends StatelessWidget {
       children: [
          const SearchTextTitle(title: 'Top Searches',),
             kheight,
-            Expanded(
-              child: ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (ctx,index)=>const TopSearchItemTile(), separatorBuilder: (ctx,index)=>kheight20, itemCount: 10),
-            ),
+           Expanded(
+          child: ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (ctx, index) => TopSearchItemTile(
+                  url: popular[index].imagePath,
+                  movieName: popular[index].title),
+              separatorBuilder: (ctx, index) => kheight20,
+              itemCount: popular.length),
+        )
 
 
       ],
@@ -30,7 +37,9 @@ class SearchIdeWidget extends StatelessWidget {
 
 
 class TopSearchItemTile extends StatelessWidget {
-  const TopSearchItemTile({super.key});
+  final String url;
+  final String movieName;
+  const TopSearchItemTile({super.key, required this.url, required this.movieName});
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +49,15 @@ class TopSearchItemTile extends StatelessWidget {
         Container(
           width:screenWidth*0.35 ,
           height: 70,
-          decoration: const BoxDecoration(
+          decoration:  BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(imageUrl),
+              image: NetworkImage(imageBase+url),
               fit: BoxFit.cover
               )
           ),
         ),
-       const Expanded(child: Text('Movie Name',style: TextStyle(color: kwhiteColor,fontSize: 16,fontWeight: FontWeight.bold),)),
+        kwidth,
+       Expanded(child: Text(movieName,style: TextStyle(color: kwhiteColor,fontSize: 16,fontWeight: FontWeight.bold),)),
         const CircleAvatar(
           backgroundColor: kwhiteColor,
           radius: 25,

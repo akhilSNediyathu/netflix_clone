@@ -13,3 +13,4 @@ const knewAndHotTempImage = 'https://assets.architecturaldigest.in/photos/61796b
 const newAndHotTemp2 ='https://i.ytimg.com/vi/ZXdZ-bAChLM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA6RAl-_eYHfbe--ofeetbMjk7e-g';
 //textstyle
 const TextStyle kHomeTitleText=  TextStyle(fontSize: 14,fontWeight: FontWeight.bold);
+String imageBase = 'https://image.tmdb.org/t/p/w500/'; 

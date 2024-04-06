@@ -1,5 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:netflix/application/controller/top_rated/top_rated.dart';
+import 'package:netflix/application/controller/upcoming/upcoming.dart';
+import 'package:netflix/application/model/top_rated/top_rated.dart';
+import 'package:netflix/application/model/upcoming/upcoming.dart';
 
 import 'package:netflix/core/colours/colors.dart';
 import 'package:netflix/core/constants.dart';
@@ -11,9 +15,29 @@ import 'package:netflix/presentaion/new_and_hot/widgets/everyones_watching_widge
 
 
 
-class ScreenNewAndHot extends StatelessWidget {
+class ScreenNewAndHot extends StatefulWidget {
   const ScreenNewAndHot({super.key});
 
+  @override
+  State<ScreenNewAndHot> createState() => _ScreenNewAndHotState();
+}
+
+class _ScreenNewAndHotState extends State<ScreenNewAndHot> {
+  List<TopRated> comingMovies = [];
+  List<Upcoming> everyOne = [];
+
+  Future getAllMovies() async {
+    comingMovies = await getTopRatedMovies();
+    everyOne = await getAllUpcoming();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getAllMovies();
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -41,27 +65,50 @@ class ScreenNewAndHot extends StatelessWidget {
           ]),
        )
         ),
-        body: TabBarView(children: [
-          _buildComingSoon(),
-          _buildEveryoneWatching(),
-        ]),
+        body: Padding(
+            padding: EdgeInsets.only(top: 8.0),
+            child: TabBarView(children: [
+              ComingSoon(
+                comingMovies: comingMovies,
+              ),
+              EveryonesWatching(everyone: everyOne)
+           ]),
+)
       ),
     );
   }
- Widget _buildComingSoon(){
-  
-return ListView.builder(
-  itemCount: 10,
-  itemBuilder: (BuildContext context, index) {
-  return const ComingSoonWidget();
-});
-  }
- Widget _buildEveryoneWatching(){
-  return ListView.builder(
-    itemCount: 10,
-    itemBuilder: (BuildContext context, index) =>const EveryOnesWatching()) ;
+
+ 
+}
+
+// ignore: must_be_immutable
+class ComingSoon extends StatelessWidget {
+  ComingSoon({super.key, required this.comingMovies});
+  List<TopRated> comingMovies = [];
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return ListView.builder(
+        itemCount: comingMovies.length,
+        itemBuilder: (context, index) {
+          return ComingSoonWidget(
+            size: size,
+            topRated: comingMovies[index],
+          );
+        });
   }
 }
 
-
+class EveryonesWatching extends StatelessWidget {
+  const EveryonesWatching({super.key, required this.everyone});
+  final List<Upcoming> everyone;
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: 30,
+        itemBuilder: (BuildContext context, index) {
+          return EveryOnesWatching(upcoming: everyone[index]);
+        });
+  }
+}
 

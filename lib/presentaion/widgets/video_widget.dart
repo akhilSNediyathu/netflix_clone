@@ -2,18 +2,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:netflix/core/colours/colors.dart';
-import 'package:netflix/core/constants.dart';
+
 
 class VideoWidget extends StatelessWidget {
+  final String imagePath;
   const VideoWidget({
-    super.key,
+    super.key, required this.imagePath,
   });
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SizedBox(width: double.infinity,height: 200,child: Image.network(knewAndHotTempImage,fit: BoxFit.cover,),),
+        SizedBox(width: double.infinity,height: 200,child: Image.network(imagePath,fit: BoxFit.cover,),),
           Positioned(
             bottom: 10,
             right: 10,

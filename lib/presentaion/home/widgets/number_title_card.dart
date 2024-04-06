@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:netflix/application/model/now_playing/now_playing.dart';
 import 'package:netflix/core/constants.dart';
 import 'package:netflix/presentaion/home/widgets/number_card.dart';
 import 'package:netflix/presentaion/widgets/main_title.dart';
 
+
+
 class NumberTitleCard extends StatelessWidget {
+  final List<NowPlaying> upcoming;
   const NumberTitleCard({
-    super.key,
+    super.key, required this.upcoming,
   });
 
   @override
@@ -21,7 +25,11 @@ class NumberTitleCard extends StatelessWidget {
               // shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               
-              children: List.generate(10, (index) => Numbercard(index: index,)),
+              children: List.generate(10, (index) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 1),
+                    child: Numbercard(
+                        index: index, image: upcoming[index].imagePath),
+                  )),
              ),
            )
           ],
