@@ -66,7 +66,7 @@ class _ScreenNewAndHotState extends State<ScreenNewAndHot> {
        )
         ),
         body: Padding(
-            padding: EdgeInsets.only(top: 8.0),
+            padding:const EdgeInsets.only(top: 8.0),
             child: TabBarView(children: [
               ComingSoon(
                 comingMovies: comingMovies,

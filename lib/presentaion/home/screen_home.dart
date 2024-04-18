@@ -17,7 +17,7 @@ import 'package:netflix/presentaion/home/widgets/main_card_home.dart';
 import 'package:netflix/presentaion/home/widgets/number_title_card.dart';
 
 
-import 'package:netflix/presentaion/widgets/main_title_card.dart';
+
 
 import '../../application/model/top_rated/top_rated.dart';
 
@@ -70,7 +70,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                   children: [
                     ListView(
                       children:  [
-                        BackgroundCard(),
+                     const   BackgroundCard(),
                        MainTitleCard(
                           movies: topRated,
                           titletext: 'Released in the past year',

@@ -57,7 +57,7 @@ class TopSearchItemTile extends StatelessWidget {
           ),
         ),
         kwidth,
-       Expanded(child: Text(movieName,style: TextStyle(color: kwhiteColor,fontSize: 16,fontWeight: FontWeight.bold),)),
+       Expanded(child: Text(movieName,style: const TextStyle(color: kwhiteColor,fontSize: 16,fontWeight: FontWeight.bold),)),
         const CircleAvatar(
           backgroundColor: kwhiteColor,
           radius: 25,
